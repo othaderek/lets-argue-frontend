@@ -1,19 +1,30 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import Header from './Layouts/Header'
+import LoginPage from './LoginPage'
+import SignUpPage from './SignUpPage'
+import ProfilePage from './ProfilePage'
 
 class App extends React.Component {
-  componentDidMount() {
-    fetch('http://localhost:3000/posts')
+  // componentDidMount() {
+  //   fetch('http://localhost:3000/api/v1/posts')
+  //   .then( res => res.json())
+  //   .then( postObj => this.setState({posts: postObj}))
+  // }
+
+  componentDidMount(){
+    fetch("http://localhost:3000/api/v1/users/1")
     .then( res => res.json())
-    .then( postObj => this.setState({posts: postObj}))
+    .then( )
   }
 
   componentDidUpdate(){
-    let state = this.state.posts
+    // let state = this.state.posts
   }
 
   state = {
-    posts: []
+    posts: [],
+    page: ""
   }
 
   render () {
@@ -31,7 +42,11 @@ class App extends React.Component {
 
     return(
       <div>
-        {postStuff}
+
+        <Header />
+        <LoginPage />
+        <SignUpPage />
+        <ProfilePage />
       </div>
     )
 
