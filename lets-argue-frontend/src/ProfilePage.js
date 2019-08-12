@@ -7,7 +7,8 @@ class ProfilePage extends React.Component {
 
   state = {
     currentUser: [],
-    postsFeed: []
+    postsFeed: [],
+    filterTerm: ""
   }
 
   componentDidMount(){
@@ -18,7 +19,6 @@ class ProfilePage extends React.Component {
     })
     .then( res => res.json())
     .then( profileData => {
-      console.log(profileData);
       this.setState({
         currentUser: profileData
       })
@@ -36,16 +36,23 @@ class ProfilePage extends React.Component {
 
   }
 
+  postFilter = (e) => {
+    this.setState({filterTerm: e.target.value})
+  }
+
   render () {
-    const posts = this.state.postsFeed.map( post => {
+    const filteredList = this.state.postsFeed.filter( post => post.title.toLowerCase().includes(this.state.filterTerm))
+
+    const posts = filteredList.map( post => {
       return(
         <PostCard {...post} />
       )
     })
 
+
     return(
       <div>
-        <Header {...this.state.currentUser}/>
+        <Header {...this.state.currentUser} postFilter={this.postFilter} />
         {posts}
       </div>
     )
