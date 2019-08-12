@@ -6,49 +6,33 @@ import SignUpPage from './SignUpPage'
 import ProfilePage from './ProfilePage'
 
 class App extends React.Component {
-  // componentDidMount() {
-  //   fetch('http://localhost:3000/api/v1/posts')
-  //   .then( res => res.json())
-  //   .then( postObj => this.setState({posts: postObj}))
-  // }
-
-  componentDidMount(){
-    fetch("http://localhost:3000/api/v1/users/1")
-    .then( res => res.json())
-    .then( )
-  }
-
-  componentDidUpdate(){
-    // let state = this.state.posts
-  }
 
   state = {
     posts: [],
-    page: ""
+    page: 'login'
+  }
+
+  redirect = (page) => {
+    this.setState({ page: page })
+  }
+
+  componentDidMount(){
+    if (localStorage.token) {
+      this.redirect('profile')
+    }
   }
 
   render () {
-
-    console.log(this.state.posts);
-    const postStuff = this.state.posts.map( post => {
-      return (
-        <div>
-          <h4>{post.title}</h4>
-          <p>{post.body}</p>
-          <p>{post.comments.map( comment => comment.body )}</p>
-        </div>
-      )
-    })
-
-    return(
-      <div>
-
-        <Header />
-        <LoginPage />
-        <SignUpPage />
-        <ProfilePage />
-      </div>
-    )
+    switch (this.state.page) {
+      case "login":
+        return <LoginPage />
+      case "signup":
+        return <SignUpPage />
+      case "profile":
+        return <ProfilePage />
+      default:
+        return <LoginPage />
+    }
 
   }
 }
