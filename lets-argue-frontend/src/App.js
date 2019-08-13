@@ -1,6 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import Header from './Layouts/Header'
 import LoginPage from './LoginPage'
 import SignUpPage from './SignUpPage'
 import ProfilePage from './ProfilePage'
