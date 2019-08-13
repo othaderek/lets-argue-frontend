@@ -13,3 +13,9 @@
   align-items: center;
 
 }
+
+.sign-up-btn {
+  flex-wrap: wrap;
+  justify-content: center;
+  
+}

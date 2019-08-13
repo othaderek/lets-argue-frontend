@@ -20,12 +20,13 @@ class App extends React.Component {
     }
   }
 
+
   render () {
     switch (this.state.page) {
       case "login":
-        return <LoginPage />
+        return <LoginPage redirect={this.redirect} />
       case "signup":
-        return <SignUpPage />
+        return <SignUpPage/>
       case "profile":
         return <ProfilePage />
       default:
