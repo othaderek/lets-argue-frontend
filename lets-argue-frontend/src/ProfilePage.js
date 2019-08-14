@@ -16,6 +16,11 @@ class ProfilePage extends React.Component {
   }
 
   componentDidMount(){
+
+    if (!localStorage.token){
+      this.props.history.push('/login')
+      return
+    }
       fetch("http://localhost:3000/api/v1/profile", {
       headers: {
         "Authorization": localStorage.token
@@ -54,6 +59,7 @@ class ProfilePage extends React.Component {
   }
 
   submitComment = (e) => {
+    e.preventDefault()
     fetch("http://localhost:3000/api/v1/comments", {
       method: 'POST',
       headers: {
@@ -83,7 +89,7 @@ class ProfilePage extends React.Component {
         </div>
       )
     })
-    
+
     return(
       <div>
         <Header {...this.state.currentUser} postFilter={this.postFilter} />

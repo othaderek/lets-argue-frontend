@@ -1,5 +1,4 @@
 import React from 'react'
-import CommentModal from './Modals/CommentModal'
 import Comment from './Comment'
 
 
