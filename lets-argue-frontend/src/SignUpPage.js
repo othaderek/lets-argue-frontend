@@ -30,6 +30,10 @@ class SignUpPage extends React.Component {
     })
   }
 
+  handleClick = () => {
+    this.props.history.push('login')
+  }
+
   render () {
     return(
       <div>
@@ -53,6 +57,7 @@ class SignUpPage extends React.Component {
               </div>
             </div>
           </div>
+          <button type="submit" className="btn btn-primary" onClick={this.handleClick}>Back</button>
         </div>
     )
 
