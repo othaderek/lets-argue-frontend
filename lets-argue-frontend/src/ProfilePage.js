@@ -74,17 +74,63 @@ class ProfilePage extends React.Component {
         commentable_id: this.state.commentable_id
       })
     })
-    window.location.reload(false)
+
+    fetch("http://localhost:3000/api/v1/posts", {
+      headers: {
+        "Authorization": localStorage.token
+      }
+    })
+    .then( res => res.json())
+    .then(postsData => {
+      this.setState({postsFeed: postsData})
+    })
+  }
+
+  handleEditPage = (e) => {
+    this.props.history.push('/edit')
+  }
+
+  refreshFetch = () => {
+    if (!localStorage.token){
+      this.props.history.push('/login')
+      return
+    }
+      fetch("http://localhost:3000/api/v1/profile", {
+      headers: {
+        "Authorization": localStorage.token
+      }
+    })
+    .then( res => res.json())
+    .then( profileData => {
+      this.setState({
+        currentUser: profileData
+      })
+    })
+
+    fetch("http://localhost:3000/api/v1/posts", {
+      headers: {
+        "Authorization": localStorage.token
+      }
+    })
+    .then( res => res.json())
+    .then(postsData => {
+      this.setState({postsFeed: postsData})
+    })
+  }
+
+  handlePostClick = (postObj) => {
+    // console.log(postObj);
+    this.props.postHandle(postObj)
   }
 
   render () {
     console.log(this.state.currentUser);
     const filteredList = this.state.postsFeed.filter( post => post.title.toLowerCase().includes(this.state.filterTerm))
 
-    const posts = filteredList.map( (post, index) => {
+    const posts = filteredList.map( (post) => {
       return(
         <div>
-          <PostCard {...post} />
+          <PostCard {...post} handlePostClick={this.handlePostClick} />
           <CommentModal {...post} type="Post" createComment={this.createComment} submitComment={this.submitComment}/>
         </div>
       )
@@ -92,7 +138,7 @@ class ProfilePage extends React.Component {
 
     return(
       <div>
-        <Header {...this.state.currentUser} postFilter={this.postFilter} />
+        <Header {...this.state.currentUser} postFilter={this.postFilter} handleEditPage={this.handleEditPage} />
         {posts}
       </div>
     )

@@ -2,18 +2,22 @@ import React from 'react'
 import LoginPage from './LoginPage'
 import SignUpPage from './SignUpPage'
 import ProfilePage from './ProfilePage'
+import EditUserPage from './EditUserPage'
+import PostView from './PostView'
 import { Switch, Route } from 'react-router-dom'
 
 class App extends React.Component {
 
   state={
     username: "",
-    password: ""
+    password: "",
+    currentUser: [],
+    currentPost: []
   }
 
   newUserSignIn = (newUser) => {
     this.setState({newUser})
-    // debugger
+
     fetch("http://localhost:3000/api/v1/login", {
       method: "POST",
       headers: {
@@ -32,14 +36,21 @@ class App extends React.Component {
 
   }
 
-  render () {
-    return(
+  postHandle = (postObj) => {
+    this.setState({currentPost: postObj})
+    this.props.history.push('/post')
+  }
 
+  render () {
+    console.log(this.state.currentUser);
+    return(
     <div>
       <Switch>
-        <Route path="/profile" component={ProfilePage}/>
+        <Route path="/profile" render={(routerProps) => <ProfilePage {...routerProps} postHandle={this.postHandle}/>} />
         <Route path="/login" render={(routerProps) => <LoginPage {...routerProps} newUser={this.state}/>} />
         <Route path="/signup" render={(routerProps) => <SignUpPage {...routerProps} newUserSignIn={this.newUserSignIn} />} />
+        <Route path="/edit" render={(routerProps) => <EditUserPage {...routerProps}/>} currentUser={this.state.currentUser} />
+        <Route path="/post" render={(routerProps) => <PostView {...routerProps} currentPost={this.state.currentPost}/>} />
       </Switch>
     </div>
   )
