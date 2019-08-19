@@ -38,7 +38,7 @@ class CommentModal extends React.Component {
               </div>
               <div className="modal-footer">
                 <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" className="btn btn-primary" onClick={this.handleClick}>Post comment</button>
+                <button type="button" className="btn btn-primary" data-dismiss="modal" onClick={this.handleClick}>Post comment</button>
               </div>
             </div>
           </div>

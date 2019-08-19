@@ -1,7 +1,5 @@
 import React from 'react'
 
-
-
 class Header extends React.Component {
 
   handleSubmitLogout = (e) => {
@@ -12,7 +10,6 @@ class Header extends React.Component {
 
   handleClickEdit = (e) => {
     e.preventDefault()
-    console.log("hi");
     this.props.handleEditPage()
   }
 

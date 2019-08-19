@@ -87,7 +87,7 @@ class ProfilePage extends React.Component {
   }
 
   handleEditPage = (e) => {
-    this.props.history.push('/edit')
+    this.props.editPage(this.state.currentUser)
   }
 
   refreshFetch = () => {
@@ -127,7 +127,7 @@ class ProfilePage extends React.Component {
     console.log(this.state.currentUser);
     const filteredList = this.state.postsFeed.filter( post => post.title.toLowerCase().includes(this.state.filterTerm))
 
-    const posts = filteredList.map( (post) => {
+    const posts = filteredList.map( (post, index) => {
       return(
         <div>
           <PostCard {...post} handlePostClick={this.handlePostClick} />

@@ -18,28 +18,27 @@ export default class PostView extends React.Component {
   }
 
   render () {
+    console.log(this.props);
 
-    if (this.state.currentPost.length !== 0){
-      const postComments = this.props.currentPost.comments.map( comment => {
-        return(
-
-          <div className="card" >
+    const comments = this.props.currentPost.comments.map( comment => {
+      return(
+        <div className="card" >
           <div className="card-body">
-          <h6 className="card-subtitle mb-2 text-muted"></h6>
-          <p className="card-text">{comment.body}</p>
-          <div className="card-footer">
-          <small className="text-muted">
-          <a href="#" className="card-link text-muted">by ≈ @{comment.user.username}</a>
-          <a href="#" className="card-link text-muted">points ≈ {comment.user.points}</a>
-          <a href="#" className="card-link text-muted">votes:</a>
-          </small>
-          <br />
+            <h6 className="card-subtitle mb-2 text-muted"></h6>
+            <p className="card-text">{comment.body}</p>
+            <div className="card-footer">
+              <small className="text-muted">
+                <a href="#" className="card-link text-muted">by ≈ @{comment.user.username}</a>
+                <a href="#" className="card-link text-muted">points ≈ {comment.user.points}</a>
+                <a href="#" className="card-link text-muted">votes:</a>
+              </small>
+              <br />
+            </div>
           </div>
-          </div>
-          </div>
-        )
-      })
-    }
+        </div>
+      )
+    })
+
 
     return(
       <div>
@@ -50,6 +49,7 @@ export default class PostView extends React.Component {
               <div className="card-body">
                 <h6 className="card-subtitle mb-2 text-muted">by ≈ @{this.props.currentPost.user.username}</h6>
                 <p className="card-text">{this.state.currentPost.body}</p>
+                {comments}
                 <div className="card-footer">
                   <small className="text-muted">
                     <a href="#" className="card-link text-muted">by ≈ @{this.props.currentPost.user.username}</a>

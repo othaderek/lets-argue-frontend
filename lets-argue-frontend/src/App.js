@@ -16,7 +16,7 @@ class App extends React.Component {
   }
 
   newUserSignIn = (newUser) => {
-    this.setState({newUser})
+    this.setState({currentUser: newUser})
 
     fetch("http://localhost:3000/api/v1/login", {
       method: "POST",
@@ -41,15 +41,20 @@ class App extends React.Component {
     this.props.history.push('/post')
   }
 
+  handleUserEdit = (user) => {
+    console.log(user);
+    this.setState({ currentUser: user })
+    this.props.history.push('/edit')
+  }
+
   render () {
-    console.log(this.state.currentUser);
     return(
     <div>
       <Switch>
-        <Route path="/profile" render={(routerProps) => <ProfilePage {...routerProps} postHandle={this.postHandle}/>} />
+        <Route path="/profile" render={(routerProps) => <ProfilePage {...routerProps} postHandle={this.postHandle} editPage={this.handleUserEdit}/>} />
         <Route path="/login" render={(routerProps) => <LoginPage {...routerProps} newUser={this.state}/>} />
         <Route path="/signup" render={(routerProps) => <SignUpPage {...routerProps} newUserSignIn={this.newUserSignIn} />} />
-        <Route path="/edit" render={(routerProps) => <EditUserPage {...routerProps}/>} currentUser={this.state.currentUser} />
+        <Route path="/edit" render={(routerProps) => <EditUserPage {...routerProps} currentUser={this.state.currentUser} />} />
         <Route path="/post" render={(routerProps) => <PostView {...routerProps} currentPost={this.state.currentPost}/>} />
       </Switch>
     </div>
@@ -58,6 +63,3 @@ class App extends React.Component {
 }
 
 export default App;
-
-
-// render={(routerProps) => <MessagesPage {...routerProps} username={this.state.username} />}
