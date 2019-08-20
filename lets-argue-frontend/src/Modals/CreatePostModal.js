@@ -1,25 +1,14 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
-class CommentModal extends React.Component {
-
-  handleChange = (e) => {
-    let postObj = this.props
-    this.props.createComment(e, postObj)
-  }
-
-  handleClick = (e) => {
-    this.props.submitComment(e)
-  }
-
-
+class CreatePostModal extends React.Component {
   render () {
     return(
       <div>
-      <div className="row justify-content-md-center">
-        <button type="button" className="btn btn-primary" id="comment-button" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">Add Comment</button>
+      <div className="form-group">
+        <button type="button" className="btn btn-primary" id="comment-button" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">+</button>
       </div>
-      <br/>
-        <div className="modal fade" id={"exampleModal" + this.props.id} tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div className="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div className="modal-dialog" role="document">
             <div className="modal-content">
               <div className="modal-header">
@@ -45,8 +34,7 @@ class CommentModal extends React.Component {
         </div>
       </div>
     )
-
   }
 }
 
-export default CommentModal;
+export default CreatePostModal;
