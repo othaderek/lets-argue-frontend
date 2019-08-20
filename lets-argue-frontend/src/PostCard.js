@@ -13,10 +13,24 @@ class PostCard extends React.Component {
     this.props.handlePostClick(clickedPost)
 
   }
+
+  deleteComment = (id) => {
+
+    fetch(`http://localhost:3000/api/v1/comments/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Authorization": localStorage.token,
+        "Content-Type": "application/json"
+      }
+    })
+
+    this.props.postsFetch()
+  }
+
   render () {
     const comments = this.props.comments.map( comment => {
       return(
-        <Comment {...comment}/>
+        <Comment {...comment} currentUser={this.props.currentUser} deleteComment={this.deleteComment}/>
       )
     })
     return(

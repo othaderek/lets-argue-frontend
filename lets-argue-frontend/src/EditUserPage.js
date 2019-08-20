@@ -12,7 +12,7 @@ class EditUser extends React.Component {
     zipcode: this.props.currentUser.zipcode
 
   }
-// :first_name, :last_name, :city, :state, :zipcode
+
   componentDidMount(){
 
     fetch(`http://localhost:3000/api/v1/users/${this.state.currentUserId}`, {
@@ -40,8 +40,12 @@ class EditUser extends React.Component {
 
   }
 
+  handleDelete = (e) => {
+    e.preventDefault()
+
+  }
+
   render () {
-    // console.log(this.props);
     return(
       <div className="container">
         <div className="card">
@@ -82,6 +86,9 @@ class EditUser extends React.Component {
                   </div>
                 </div>
                 <button className="btn btn-primary" type="submit">Edit</button>
+                  <br/>
+                  <br/>
+                <button className="btn btn-primary" type="submit" onClick={this.handleDelete}>DELETE USER</button>
               </form>
             </div>
         </div>

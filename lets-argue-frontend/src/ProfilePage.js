@@ -33,15 +33,7 @@ class ProfilePage extends React.Component {
       })
     })
 
-    fetch("http://localhost:3000/api/v1/posts", {
-      headers: {
-        "Authorization": localStorage.token
-      }
-    })
-    .then( res => res.json())
-    .then(postsData => {
-      this.setState({postsFeed: postsData})
-    })
+    this.postsFetch()
 
   }
 
@@ -74,16 +66,7 @@ class ProfilePage extends React.Component {
         commentable_id: this.state.commentable_id
       })
     })
-
-    fetch("http://localhost:3000/api/v1/posts", {
-      headers: {
-        "Authorization": localStorage.token
-      }
-    })
-    .then( res => res.json())
-    .then(postsData => {
-      this.setState({postsFeed: postsData})
-    })
+    this.postsFetch()
   }
 
   handleEditPage = (e) => {
@@ -106,6 +89,14 @@ class ProfilePage extends React.Component {
         currentUser: profileData
       })
     })
+    this.postsFetch()
+  }
+
+  handlePostClick = (postObj) => {
+    this.props.postHandle(postObj)
+  }
+
+  postsFetch = () => {
 
     fetch("http://localhost:3000/api/v1/posts", {
       headers: {
@@ -118,11 +109,6 @@ class ProfilePage extends React.Component {
     })
   }
 
-  handlePostClick = (postObj) => {
-    // console.log(postObj);
-    this.props.postHandle(postObj)
-  }
-
   render () {
     console.log(this.state.currentUser);
     const filteredList = this.state.postsFeed.filter( post => post.title.toLowerCase().includes(this.state.filterTerm))
@@ -130,7 +116,7 @@ class ProfilePage extends React.Component {
     const posts = filteredList.map( (post, index) => {
       return(
         <div>
-          <PostCard {...post} handlePostClick={this.handlePostClick} />
+          <PostCard {...post} handlePostClick={this.handlePostClick} currentUser={this.state.currentUser} postsFetch={this.postsFetch}/>
           <CommentModal {...post} type="Post" createComment={this.createComment} submitComment={this.submitComment}/>
         </div>
       )
@@ -139,6 +125,8 @@ class ProfilePage extends React.Component {
     return(
       <div>
         <Header {...this.state.currentUser} postFilter={this.postFilter} handleEditPage={this.handleEditPage} />
+        <br/>
+        <br/>
         {posts}
       </div>
     )
