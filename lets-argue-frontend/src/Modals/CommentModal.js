@@ -16,7 +16,7 @@ class CommentModal extends React.Component {
     return(
       <div>
       <div className="row justify-content-md-center">
-        <button type="button" className="btn btn-primary" id="comment-button" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">Add Comment</button>
+        <button type="button" className="btn btn-primary" id="comment-button" data-toggle="modal" data-target={"#exampleModal" + this.props.id} data-whatever="@getbootstrap">Add Comment</button>
       </div>
       <br/>
         <div className="modal fade" id={"exampleModal" + this.props.id} tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
