@@ -27,6 +27,10 @@ class PostCard extends React.Component {
     this.props.postsFetch()
   }
 
+  deletePost = (e) => {
+    debugger
+  }
+
   render () {
     const comments = this.props.comments.map( comment => {
       return(
@@ -46,6 +50,11 @@ class PostCard extends React.Component {
                 <a href="#" className="card-link text-muted">by ≈ @{this.props.user.username}</a>
                 <a href="#" className="card-link text-muted">channel ≈ #{this.props.channel.name}</a>
                 <a href="#" className="card-link text-muted">points: {this.props.user.points}</a>
+                  {
+                    this.props.user.username === this.props.currentUser.username
+                    ? <button type="button" className="close" aria-label="Close" onClick={this.deletePost}>x</button>
+                    : null
+                  }
               </small>
               <br />
 

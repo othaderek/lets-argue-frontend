@@ -1,5 +1,5 @@
 import React from 'react'
-import CreatePostModal from '../Modals/CreatePostModal' 
+import CreatePostModal from '../Modals/CreatePostModal'
 
 class Header extends React.Component {
 
@@ -18,6 +18,7 @@ class Header extends React.Component {
     e.preventDefault()
 
   }
+  
 
   render () {
     return(
@@ -25,7 +26,7 @@ class Header extends React.Component {
         <a className="navbar-brand">lets argue</a>
         <form className="form-inline">
           <input className="form-control mr-sm-2" type="search" placeholder="Search posts.." aria-label="Search" onChange={this.props.postFilter}/>
-          <CreatePostModal />
+          <CreatePostModal id={this.props.id} postsFetch={this.props.postsFetch}/>
           <button className="btn btn-outline-success my-2 my-sm-0" type="submit" onClick={this.handleClickEdit}>Edit</button>
           <button className="btn btn-outline-success my-2 my-sm-0" type="submit" onClick={this.handleSubmitLogout}>Logout</button>
         </form>

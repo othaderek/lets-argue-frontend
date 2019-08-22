@@ -124,7 +124,7 @@ class ProfilePage extends React.Component {
 
     return(
       <div>
-        <Header {...this.state.currentUser} postFilter={this.postFilter} handleEditPage={this.handleEditPage} />
+        <Header {...this.state.currentUser} postFilter={this.postFilter} handleEditPage={this.handleEditPage} postsFetch={this.postsFetch} />
         <br/>
         <br/>
         {posts}
