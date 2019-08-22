@@ -4,10 +4,6 @@ import Comment from './Comment'
 
 class PostCard extends React.Component {
 
-  createComment = (e) => {
-    console.log(e.target.value);
-  }
-
   handleClick = (e) => {
     let clickedPost = this.props
     this.props.handlePostClick(clickedPost)
@@ -28,7 +24,16 @@ class PostCard extends React.Component {
   }
 
   deletePost = (e) => {
-    debugger
+    e.preventDefault()
+    fetch(`http://localhost:3000/api/v1/posts/${this.props.id}`, {
+      method: "DELETE",
+      headers: {
+        "Authorization": localStorage.token,
+        "Content-Type": "application/json"
+      }
+    })
+    this.props.postsFetch()
+    
   }
 
   render () {

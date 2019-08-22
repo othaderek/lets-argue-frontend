@@ -53,6 +53,7 @@ class CreatePostModal extends React.Component {
         channel_id: this.state.channel_id
       })
     })
+    
     this.props.postsFetch()
   }
 

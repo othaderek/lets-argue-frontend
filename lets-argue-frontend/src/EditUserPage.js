@@ -42,7 +42,15 @@ class EditUser extends React.Component {
 
   handleDelete = (e) => {
     e.preventDefault()
-
+    fetch(`http://localhost:3000/api/v1/users/${this.state.currentUserId}`, {
+      method: "DELETE",
+      headers: {
+        "Authorization": localStorage.token,
+        "Content-Type": "application/json"
+      }
+    })
+    window.localStorage.clear()
+    this.props.history.push('/login')
   }
 
   render () {
