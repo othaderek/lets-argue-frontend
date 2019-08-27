@@ -15,6 +15,9 @@ class App extends React.Component {
     currentPost: []
   }
 
+  // When user logs in, this makes POST request and sets state to currentUser
+  // then if the response contains a token save the token to localStorage
+  // pushes to profile url in router.
   newUserSignIn = (newUser) => {
     this.setState({currentUser: newUser})
 
