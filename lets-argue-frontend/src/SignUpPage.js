@@ -36,9 +36,9 @@ class SignUpPage extends React.Component {
 
   render () {
     return(
-      <div>
-        <div className="container">
-          <div className="col-4">
+      <div className="container">
+        <div className="row">
+          <div className="col-md">
             <div className="card">
               <h5 className="card-header">Sign Up!</h5>
                 <div className="card-body">
@@ -57,7 +57,9 @@ class SignUpPage extends React.Component {
               </div>
             </div>
           </div>
+          <div className="right">
           <button type="submit" className="btn btn-primary" onClick={this.handleClick}>Back</button>
+          </div>
         </div>
     )
 
