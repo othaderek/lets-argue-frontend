@@ -16,7 +16,10 @@ class ProfilePage extends React.Component {
   }
 
   componentDidMount(){
-
+    if (localStorage.currentPost){
+      localStorage.removeItem("currentPost")
+    }
+    
     if (!localStorage.token){
       this.props.history.push('/login')
       return

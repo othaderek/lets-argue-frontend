@@ -8,8 +8,13 @@ export default class PostView extends React.Component {
     currentPost: []
   }
 
-  componentDidMount(){
-    this.setState({currentPost: this.props.currentPost})
+  componentWillMount(){
+    if (localStorage.currentPost){
+      this.setState({currentPost: JSON.parse(localStorage.currentPost)})
+    } else {
+      localStorage.currentPost = JSON.stringify(this.props.currentPost)
+      this.setState({currentPost: this.props.currentPost})
+    }
   }
 
   handleClick = (e) => {
@@ -18,9 +23,9 @@ export default class PostView extends React.Component {
   }
 
   render () {
-    console.log(this.props);
+    console.log(this.state);
 
-    const comments = this.props.currentPost.comments.map( comment => {
+    const comments = this.state.currentPost.comments.map( comment => {
       return(
         <div className="card" >
           <div className="card-body">
@@ -47,14 +52,14 @@ export default class PostView extends React.Component {
             <div className="card" >
             <h5 className="card-header"><a href="javascript:;" onClick={""}>{this.state.currentPost.title}</a></h5>
               <div className="card-body">
-                <h6 className="card-subtitle mb-2 text-muted">by ≈ @{this.props.currentPost.user.username}</h6>
+                <h6 className="card-subtitle mb-2 text-muted">by ≈ @{this.state.currentPost.user.username}</h6>
                 <p className="card-text">{this.state.currentPost.body}</p>
                 {comments}
                 <div className="card-footer">
                   <small className="text-muted">
-                    <a href="#" className="card-link text-muted">by ≈ @{this.props.currentPost.user.username}</a>
-                    <a href="#" className="card-link text-muted">channel ≈ #{this.props.currentPost.channel.name}</a>
-                    <a href="#" className="card-link text-muted">points: {this.props.currentPost.user.points}</a>
+                    <a href="#" className="card-link text-muted">by ≈ @{this.state.currentPost.user.username}</a>
+                    <a href="#" className="card-link text-muted">channel ≈ #{this.state.currentPost.channel.name}</a>
+                    <a href="#" className="card-link text-muted">points: {this.state.currentPost.user.points}</a>
                   </small>
                   <br />
                 </div>
