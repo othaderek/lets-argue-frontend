@@ -7,7 +7,11 @@ export default class PostView extends React.Component {
   state = {
     currentPost: []
   }
+  /*
+  This component lifecycle function below will check local storage to see if there is a current post
+  It is designed to prevent the app from breaking on a refresh. 
 
+  */
   componentWillMount(){
     if (localStorage.currentPost){
       this.setState({currentPost: JSON.parse(localStorage.currentPost)})
