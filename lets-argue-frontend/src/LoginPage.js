@@ -6,7 +6,7 @@ class LoginPage extends React.Component {
     username: "",
     password: ""
   }
-
+  // Controlled form setState function.
   handleChange = (e) => {
     this.setState({[e.target.name]: e.target.value})
   }
