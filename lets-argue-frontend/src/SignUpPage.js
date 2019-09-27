@@ -31,7 +31,7 @@ class SignUpPage extends React.Component {
   }
 
   handleClick = () => {
-    this.props.history.push('login')
+    this.props.history.push('/login')
   }
 
   render () {
